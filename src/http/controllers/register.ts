@@ -27,6 +27,6 @@ export async function registerController(
       return reply.status(409).send({ message: error.message })
     }
 
-    return reply.status(500).send()
+    throw error
   }
 }

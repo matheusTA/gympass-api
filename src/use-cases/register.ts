@@ -13,7 +13,7 @@ interface RegisterUseCaseOutput {
   user: User
 }
 
-export class RegisterUseCase {
+export class RegisterUseCase  {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({ name, email, password }: RegisterUseCaseInput): Promise<RegisterUseCaseOutput> {
