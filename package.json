@@ -12,6 +12,7 @@
     "docker:stop": "docker-compose stop",
     "docker:down": "docker-compose down",
     "migrate:dev": "npx prisma migrate dev",
+    "db:studio": "npx prisma studio",
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build"
