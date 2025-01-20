@@ -1,4 +1,4 @@
-import { UsersAlreadyExistsError } from '@/errors/users-already-exists-error'
+import { UsersAlreadyExistsError } from '@/use-cases/errors/users-already-exists-error'
 import { UsersRepository } from '@/repositories/users-repository'
 import { User } from '@prisma/client'
 import { hash } from 'bcryptjs'
