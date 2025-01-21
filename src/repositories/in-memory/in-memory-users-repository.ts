@@ -12,7 +12,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       return null;
     }
 
-    return user
+    return user;
   }
 
   async findByEmail(email: string) {

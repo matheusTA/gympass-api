@@ -1,5 +1,5 @@
-import { app } from '@/app'
-import { env } from '@/env'
+import { app } from "@/app";
+import { env } from "@/env";
 
 app
   .listen({
@@ -7,5 +7,5 @@ app
     host: env.HOST,
   })
   .then((address) => {
-    console.log(`🚀 Server listening on ${address}`)
-  })
+    console.log(`🚀 Server listening on ${address}`);
+  });

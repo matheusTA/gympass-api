@@ -13,7 +13,9 @@ interface GetUserProfileUseCaseOutput {
 export class GetUserProfileUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ userId }: GetUserProfileUseCaseInput): Promise<GetUserProfileUseCaseOutput> {
+  async execute({
+    userId,
+  }: GetUserProfileUseCaseInput): Promise<GetUserProfileUseCaseOutput> {
     const user = await this.usersRepository.findById(userId);
 
     if (!user) {
@@ -21,7 +23,7 @@ export class GetUserProfileUseCase {
     }
 
     return {
-      user
+      user,
     };
   }
 }
