@@ -7,7 +7,7 @@ import isBetween from "dayjs/plugin/isBetween";
 dayjs.extend(isBetween);
 
 export class InMemoryCheckInsRepository implements CheckInsRepository {
-  public checkIns: CheckIn[] = [];
+  private checkIns: CheckIn[] = [];
 
   async findByUserIdOnDate(userId: string, date: Date) {
     const startOfTheDay = dayjs(date).startOf('date')
