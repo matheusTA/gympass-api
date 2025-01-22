@@ -5,15 +5,15 @@ import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-
 import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error";
 import { MaxDistanceError } from "./errors/max-distance-error";
 
-let checkInRepository: InMemoryCheckInsRepository;
+let checkInsRepository: InMemoryCheckInsRepository;
 let gymsRepository: InMemoryGymsRepository;
 let checkInUseCase: CheckInUseCase;
 
 describe("check in use case", () => {
   beforeEach(async () => {
-    checkInRepository = new InMemoryCheckInsRepository();
+    checkInsRepository = new InMemoryCheckInsRepository();
     gymsRepository = new InMemoryGymsRepository();
-    checkInUseCase = new CheckInUseCase(checkInRepository, gymsRepository);
+    checkInUseCase = new CheckInUseCase(checkInsRepository, gymsRepository);
 
     await gymsRepository.create({
       id: "gym-01",
