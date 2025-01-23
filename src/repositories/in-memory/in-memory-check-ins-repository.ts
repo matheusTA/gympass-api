@@ -9,6 +9,10 @@ dayjs.extend(isBetween);
 export class InMemoryCheckInsRepository implements CheckInsRepository {
   private checkIns: CheckIn[] = [];
 
+  async findById(id: string) {
+    return this.checkIns.find((checkIn) => checkIn.id === id) || null;
+  }
+
   async findByUserIdOnDate(userId: string, date: Date) {
     const startOfTheDay = dayjs(date).startOf("date");
     const endOfTheDay = dayjs(date).endOf("date");
@@ -53,6 +57,18 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     };
 
     this.checkIns.push(checkIn);
+
+    return checkIn;
+  }
+
+  async save(checkIn: CheckIn) {
+    const checkInIndex = this.checkIns.findIndex(
+      (item) => item.id === checkIn.id,
+    );
+
+    if (checkInIndex >= 0) {
+      this.checkIns[checkInIndex] = checkIn;
+    }
 
     return checkIn;
   }
