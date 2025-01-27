@@ -38,8 +38,8 @@ export class PrismaGymsRepository implements GymsRepository {
           },
         ],
       },
-      skip: page * 20,
       take: 20,
+      skip: (page - 1) * 20,
     });
 
     return gyms;
