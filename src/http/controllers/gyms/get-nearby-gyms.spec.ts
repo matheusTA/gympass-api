@@ -2,6 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import request from "supertest";
 import { app } from "@/app";
 import { createAndAuthenticateUser } from "@/utils/test/create-and-authenticate-user";
+import { Role } from "@prisma/client";
 
 describe("nearby gyms controller", () => {
   beforeAll(async () => {
@@ -13,7 +14,7 @@ describe("nearby gyms controller", () => {
   });
 
   it("should be able to get nearby gyms", async () => {
-    const { token } = await createAndAuthenticateUser(app);
+    const { token } = await createAndAuthenticateUser(app, Role.ADMIN);
 
     await request(app.server)
       .post("/gyms")
