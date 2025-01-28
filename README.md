@@ -1,6 +1,6 @@
 # App
 
-Gympass style application, using the SOLID pattern concept
+Gympass style application, using the SOLID pattern concept.
 
 ## RFs (Requisitos funcionais)
 
