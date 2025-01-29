@@ -53,7 +53,7 @@
       "build/**",
       "coverage/**",
       "tsconfig.json",
-      "./biome.json"
+      "biome.json"
     ]
   },
   "javascript": {
