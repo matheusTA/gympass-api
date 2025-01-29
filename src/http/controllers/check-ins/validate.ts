@@ -1,22 +1,22 @@
-import { z } from "zod";
-import { FastifyRequest, FastifyReply } from "fastify";
-import { makeValidateCheckInsUseCase } from "@/use-cases/factories/make-validate-check-ins-use-case";
+import { makeValidateCheckInsUseCase } from '@/use-cases/factories/make-validate-check-ins-use-case';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { z } from 'zod';
 
 export async function validateCheckInController(
-  request: FastifyRequest,
-  reply: FastifyReply,
+	request: FastifyRequest,
+	reply: FastifyReply,
 ) {
-  const validateCheckInQuerySchema = z.object({
-    checkInId: z.string().uuid(),
-  });
+	const validateCheckInQuerySchema = z.object({
+		checkInId: z.string().uuid(),
+	});
 
-  const { checkInId } = validateCheckInQuerySchema.parse(request.params);
+	const { checkInId } = validateCheckInQuerySchema.parse(request.params);
 
-  const validateCheckInsUseCase = makeValidateCheckInsUseCase();
+	const validateCheckInsUseCase = makeValidateCheckInsUseCase();
 
-  await validateCheckInsUseCase.execute({
-    checkInId,
-  });
+	await validateCheckInsUseCase.execute({
+		checkInId,
+	});
 
-  return reply.status(204).send();
+	return reply.status(204).send();
 }

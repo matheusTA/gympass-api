@@ -7,14 +7,23 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": []
+    "ignore": [
+      "node_modules/**",
+      "build/**",
+      "coverage/**",
+      "tsconfig.json",
+      "biome.json"
+    ]
   },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
     "ignore": [
       "node_modules/**",
-      "build/**"
+      "build/**",
+      "coverage/**",
+      "tsconfig.json",
+      "biome.json"
     ],
     "attributePosition": "auto",
     "indentStyle": "tab",
@@ -38,7 +47,14 @@
       "suspicious": {
         "noConsoleLog": "error"
       }
-    }
+    },
+    "ignore": [
+      "node_modules/**",
+      "build/**",
+      "coverage/**",
+      "tsconfig.json",
+      "./biome.json"
+    ]
   },
   "javascript": {
     "globals": [

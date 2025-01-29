@@ -1,53 +1,54 @@
-import { Gym, Prisma } from "@prisma/client";
-import { GymsRepository } from "../gyms-repository";
-import { randomUUID } from "node:crypto";
-import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates";
+import { randomUUID } from 'node:crypto';
+import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates';
+import type { Gym } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+import type { GymsRepository } from '../gyms-repository';
 
 export class InMemoryGymsRepository implements GymsRepository {
-  private gyms: Gym[] = [];
+	private gyms: Gym[] = [];
 
-  async findById(id: string) {
-    const gym = this.gyms.find((gym) => gym.id === id);
+	async findById(id: string) {
+		const gym = this.gyms.find((gym) => gym.id === id);
 
-    if (!gym) {
-      return null;
-    }
+		if (!gym) {
+			return null;
+		}
 
-    return gym;
-  }
+		return gym;
+	}
 
-  async findManyNearby(latitude: number, longitude: number) {
-    return this.gyms.filter((gym) => {
-      const distance = getDistanceBetweenCoordinates(
-        { latitude, longitude },
-        {
-          latitude: gym.latitude.toNumber(),
-          longitude: gym.longitude.toNumber(),
-        },
-      );
+	async findManyNearby(latitude: number, longitude: number) {
+		return this.gyms.filter((gym) => {
+			const distance = getDistanceBetweenCoordinates(
+				{ latitude, longitude },
+				{
+					latitude: gym.latitude.toNumber(),
+					longitude: gym.longitude.toNumber(),
+				},
+			);
 
-      return distance < 10;
-    });
-  }
+			return distance < 10;
+		});
+	}
 
-  async searchManyByQuery(query: string, page: number) {
-    return this.gyms
-      .filter((gym) => gym.title.includes(query))
-      .slice((page - 1) * 20, page * 20);
-  }
+	async searchManyByQuery(query: string, page: number) {
+		return this.gyms
+			.filter((gym) => gym.title.includes(query))
+			.slice((page - 1) * 20, page * 20);
+	}
 
-  async create(data: Prisma.GymCreateInput) {
-    const gym: Gym = {
-      id: data.id ?? randomUUID(),
-      title: data.title,
-      description: data.description ?? null,
-      phone: data.phone ?? null,
-      latitude: new Prisma.Decimal(data.latitude.toString()),
-      longitude: new Prisma.Decimal(data.longitude.toString()),
-    };
+	async create(data: Prisma.GymCreateInput) {
+		const gym: Gym = {
+			id: data.id ?? randomUUID(),
+			title: data.title,
+			description: data.description ?? null,
+			phone: data.phone ?? null,
+			latitude: new Prisma.Decimal(data.latitude.toString()),
+			longitude: new Prisma.Decimal(data.longitude.toString()),
+		};
 
-    this.gyms.push(gym);
+		this.gyms.push(gym);
 
-    return gym;
-  }
+		return gym;
+	}
 }

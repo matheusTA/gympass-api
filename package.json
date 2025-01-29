@@ -19,8 +19,8 @@
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
-    "biome:check": "biome check",
-    "biome:format": "biome format ./src"
+    "biome:check": "biome check ./src",
+    "biome:format": "biome format ./src --write"
   },
   "keywords": [],
   "author": "",

@@ -1,21 +1,21 @@
-import { z } from "zod";
-import { FastifyRequest, FastifyReply } from "fastify";
-import { makeSearchGymsUseCase } from "@/use-cases/factories/make-search-gyms-use-case";
+import { makeSearchGymsUseCase } from '@/use-cases/factories/make-search-gyms-use-case';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { z } from 'zod';
 
 export async function searchGymsController(
-  request: FastifyRequest,
-  reply: FastifyReply,
+	request: FastifyRequest,
+	reply: FastifyReply,
 ) {
-  const searchGymsQuerySchema = z.object({
-    query: z.string(),
-    page: z.coerce.number().min(1).default(1),
-  });
+	const searchGymsQuerySchema = z.object({
+		query: z.string(),
+		page: z.coerce.number().min(1).default(1),
+	});
 
-  const { query, page } = searchGymsQuerySchema.parse(request.query);
+	const { query, page } = searchGymsQuerySchema.parse(request.query);
 
-  const searchGymsUseCase = makeSearchGymsUseCase();
+	const searchGymsUseCase = makeSearchGymsUseCase();
 
-  const { gyms } = await searchGymsUseCase.execute({ query, page });
+	const { gyms } = await searchGymsUseCase.execute({ query, page });
 
-  return reply.status(200).send({ gyms });
+	return reply.status(200).send({ gyms });
 }

@@ -1,41 +1,42 @@
-import { Prisma, User } from "@prisma/client";
-import { UsersRepository } from "../users-repository";
-import { randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto';
+import { type Prisma, Role, type User } from '@prisma/client';
+import type { UsersRepository } from '../users-repository';
 
 export class InMemoryUsersRepository implements UsersRepository {
-  private users: User[] = [];
+	private users: User[] = [];
 
-  async findById(id: string) {
-    const user = this.users.find((user) => user.id === id);
+	async findById(id: string) {
+		const user = this.users.find((user) => user.id === id);
 
-    if (!user) {
-      return null;
-    }
+		if (!user) {
+			return null;
+		}
 
-    return user;
-  }
+		return user;
+	}
 
-  async findByEmail(email: string) {
-    const user = this.users.find((user) => user.email === email);
+	async findByEmail(email: string) {
+		const user = this.users.find((user) => user.email === email);
 
-    if (!user) {
-      return null;
-    }
+		if (!user) {
+			return null;
+		}
 
-    return user;
-  }
+		return user;
+	}
 
-  async create(data: Prisma.UserCreateInput) {
-    const user = {
-      createdAt: new Date(),
-      id: randomUUID(),
-      name: data.name,
-      email: data.email,
-      passwordHash: data.passwordHash,
-    };
+	async create(data: Prisma.UserCreateInput) {
+		const user: User = {
+			createdAt: new Date(),
+			id: randomUUID(),
+			name: data.name,
+			email: data.email,
+			passwordHash: data.passwordHash,
+			role: data.role ?? Role.ADMIN,
+		};
 
-    this.users.push(user);
+		this.users.push(user);
 
-    return user;
-  }
+		return user;
+	}
 }

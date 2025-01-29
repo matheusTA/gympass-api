@@ -1,21 +1,21 @@
-import { CheckInsRepository } from "@/repositories/check-ins-repository";
+import type { CheckInsRepository } from '@/repositories/check-ins-repository';
 
 interface GetUserMetricsUseCaseInput {
-  userId: string;
+	userId: string;
 }
 
 interface GetUserMetricsUseCaseOutput {
-  checkInsCount: number;
+	checkInsCount: number;
 }
 
 export class GetUserMetricsUseCase {
-  constructor(private checkInsRepository: CheckInsRepository) {}
+	constructor(private checkInsRepository: CheckInsRepository) {}
 
-  async execute({
-    userId,
-  }: GetUserMetricsUseCaseInput): Promise<GetUserMetricsUseCaseOutput> {
-    const checkInsCount = await this.checkInsRepository.countByUserId(userId);
+	async execute({
+		userId,
+	}: GetUserMetricsUseCaseInput): Promise<GetUserMetricsUseCaseOutput> {
+		const checkInsCount = await this.checkInsRepository.countByUserId(userId);
 
-    return { checkInsCount };
-  }
+		return { checkInsCount };
+	}
 }
