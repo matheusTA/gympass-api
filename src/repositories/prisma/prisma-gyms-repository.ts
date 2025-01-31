@@ -1,6 +1,6 @@
 import { prisma } from '@/config/prisma';
+import type { GymsRepository } from '@/repositories/gyms-repository';
 import type { Gym, Prisma } from '@prisma/client';
-import type { GymsRepository } from '../gyms-repository';
 
 export class PrismaGymsRepository implements GymsRepository {
 	async findById(id: string) {

@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
+import type { CheckInsRepository } from '@/repositories/check-ins-repository';
 import type { CheckIn, Prisma } from '@prisma/client';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import type { CheckInsRepository } from '../check-ins-repository';
 
 dayjs.extend(isBetween);
 

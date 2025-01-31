@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
-import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates';
+import type { GymsRepository } from '@/repositories/gyms-repository';
+import { getDistanceBetweenCoordinates } from '@/shared/functions/get-distance-between-coordinates';
 import type { Gym } from '@prisma/client';
 import { Prisma } from '@prisma/client';
-import type { GymsRepository } from '../gyms-repository';
 
 export class InMemoryGymsRepository implements GymsRepository {
 	private gyms: Gym[] = [];
